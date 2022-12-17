@@ -5,4 +5,4 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login')
 def dashboard_view(request):
     """ Dashboard page """
-    return render(request, 'main/base.html', {})
+    return render(request, 'main/dashboard.html', {})
