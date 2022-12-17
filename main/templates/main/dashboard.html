@@ -1,7 +1,40 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load bootstrap5 %}
 
 {% block body %}
-<h1 class="bg-red">Hello World!!!</h1>
+<form action="{% url 'main:dashboard' %}" class="form m-5" method="post">
+    <br>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" name="submit" class="btn btn-md color-1">
+</form>
+
+
+<div class="m-5">
+    <h3 class="text-center text-black">
+        User Scores:
+    </h3>
+    <table class="table table-striped">
+        <thead class="table-color-primary">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">User</th>
+                <th scope="col">Date</th>
+                <th scope="col">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in scores %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ score.user.username }}</td>
+                <td>{{ score.date }}</td>
+                <td>{{ score.score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>  
 <a href="{% url 'main:logout' %}">Logout</a>
 {% endblock body %}

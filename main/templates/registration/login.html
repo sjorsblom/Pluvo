@@ -3,9 +3,23 @@
 {% load bootstrap5 %}
 
 {% block body %}
-<form action="{% url 'main:login' %}" method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <button type="submit" class="">Login</button>
-</form>
+
+<img src="{% static '/images/pluvo-logo-zwart.svg' %}" class="mx-auto d-block mt-5" alt="Pluvo" style="width:250px;">
+<div class="container mt-5" id="login">
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12 ps-5 pe-5">
+                    <form class="form" action="{% url 'main:login' %}" method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary mb-3">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock body %}
