@@ -6,10 +6,7 @@ from datetime import datetime
 
 class User(AbstractUser):
     """ Extention on django user model """
-    name = CharField()
-    age = DateField()
-    email = EmailField(unique=True) 
-    password = CharField()
+    age = DateField(null=True)
 
 
 class Score(Model):
