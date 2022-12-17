@@ -19,6 +19,12 @@
 </head>
 
 <body>
+    <header>
+        <nav class="container-fluid">
+            <a class="nav-link" href="#"><img src="{% static '/images/pluvo-logo-zwart.svg' %}" class="mt-1" alt="Pluvo" style="width:50px;"></a>
+            <a class="nav-link" href="{% url 'main:logout' %}">Logout</a>
+        </nav>
+    </header>
     {% block body %}
     {% endblock %}
     <script src="{% static 'main/script.js' %}"></script>

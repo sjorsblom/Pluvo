@@ -1,12 +1,12 @@
 from django.core.exceptions import ValidationError
-from django.forms import Form, SelectDateWidget
+from django.forms import Form, DateInput
 from django.forms.fields import ChoiceField, DateField
 from main.models import User
 import datetime
 
 class ScoreSelectionForm(Form):
-    start = DateField(label="Grades from:", initial=lambda: datetime.date.today() - datetime.timedelta(days=7), required=True, widget=SelectDateWidget)
-    end = DateField(label="Grades until:", initial=datetime.date.today, required=True, widget=SelectDateWidget)
+    start = DateField(label="Grades from:", initial=lambda: datetime.date.today() - datetime.timedelta(days=7), required=True, widget=DateInput(attrs=dict(type='date')))
+    end = DateField(label="Grades until:", initial=datetime.date.today, required=True, widget=DateInput(attrs=dict(type='date')))
     user = ChoiceField(label="User:", choices=[], required=True)
 
     def __init__(self, *args, **kwargs):
