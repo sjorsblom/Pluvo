@@ -1,10 +1,11 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load bootstrap5 %}
 
 {% block body %}
 <form action="{% url 'main:login' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% bootstrap_form form %}
     <button type="submit" class="">Login</button>
 </form>
 {% endblock body %}
