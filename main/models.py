@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, DateField, EmailField, ForeignKey, DateTimeField, FloatField
 from django.db.models import Model, CASCADE
-import datetime
+from datetime import datetime
 
 
 class User(AbstractUser):
