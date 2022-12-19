@@ -42,7 +42,12 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                pluvo_green: '#06c389',
+                pluvo_highlight_green: '#11b683'
+            }
+        },
     },
     plugins: [
         /**
