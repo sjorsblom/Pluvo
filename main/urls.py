@@ -7,6 +7,7 @@ app_name = 'main'
 urlpatterns = [
     # Authentication
     path('', views.dashboard_view, name='dashboard'),
+    path('teacher/', views.teacher_view, name='teacher'),
     path('login/', LoginView.as_view(authentication_form=UserLoginForm), name='login'),
     path('logout/', LogoutView.as_view(), name='logout')
 ]
