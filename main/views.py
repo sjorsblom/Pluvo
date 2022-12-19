@@ -8,8 +8,6 @@ from django.contrib.auth.decorators import user_passes_test
 @login_required(login_url='/login')
 def dashboard_view(request):
     """ Dashboard page """
-    scores = []
-
     form = ScoreSelectionForm()
     if request.method == 'POST':
         form = ScoreSelectionForm(request.POST)
@@ -17,10 +15,24 @@ def dashboard_view(request):
             start_date = form.cleaned_data['start']
             end_date = form.cleaned_data['end'] + datetime.timedelta(days=1) # Add a day to include current day
             scores = Score.objects.filter(user=form.cleaned_data['user']).filter(date__gte=start_date).filter(date__lt=end_date)
+            scores_only = list(map(lambda score: getattr(score, 'score'), scores))
+
+            highestScore = '-'
+            averageScore = '-'
+            if len(scores_only) > 0:
+                highestScore = max(scores_only)
+                averageScore = sum(scores_only) / len(scores_only)
+           
+            return render(request, 'main/scores.html', {
+                'form': form,
+                'highestScore': highestScore,
+                'averageScore': averageScore,
+                'scores': scores
+            })
 
     return render(request, 'main/scores.html', {
         'form': form,
-        'scores': scores
+        'scores': []
     })
 
 

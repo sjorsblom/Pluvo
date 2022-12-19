@@ -56,6 +56,12 @@
                 </tbody>
                 </table>
             </div>
+            <div class="sm:flex sm:items-center mt-5">
+                <div class="sm:flex-auto">
+                    <h1 class="text-xl font-semibold">Total Grade: <span class="{% if averageScore < 6 %} text-red-500 {% else %} text-gray-900 {% endif %}">{{ averageScore }}</span></h1>
+                    <p class="mt-2 text-sm">Highest Grade: <span class="{% if highestScore < 6 %} text-red-500 {% else %} text-gray-700 {% endif %}">{{ highestScore }}</span></p>
+                </div>
+            </div>
         {% else %}
             <h3 class="text-center text-black">
                 Geen scores gevonden!
