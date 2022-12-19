@@ -17,4 +17,9 @@ python manage.py tailwind start
 # To run the django instance
 python manage.py runserver
 
+# Create superuser to start with
+python manage.py createsuperuser
+
+# From here add regular users in the admin page
+
 
