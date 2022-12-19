@@ -5,13 +5,16 @@
 <header class="bg-white">
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
       <div class="flex w-full items-center justify-between border-b border-indigo-500 py-6 lg:border-none">
-        <a href="#">
+        <a href="{% url 'main:dashboard' %}">
             <span class="sr-only">Pluvo</span>
             <img class="h-10 w-auto" src="{% static '/images/pluvo-logo-zwart.svg' %}" alt="">
           </a>
         <div class="flex items-center">
           <div class="ml-10 hidden space-x-8 lg:block">
-            <a href="#" class="text-base font-medium text-pluvo_green hover:text-pluvo_highlight_green font-sans font-bold">Dashboard</a>
+            <a href="{% url 'main:dashboard' %}" class="text-base font-medium text-pluvo_green hover:text-pluvo_highlight_green font-sans font-bold">Dashboard</a>
+            {% if user.is_superuser %}
+                <a href="{% url 'main:teacher' %}" class="text-base font-medium text-pluvo_green hover:text-pluvo_highlight_green font-sans font-bold">Teacher</a>
+            {% endif %}
           </div>
         </div>
         <div class="ml-10 space-x-4">
@@ -19,50 +22,11 @@
         </div>
       </div>
       <div class="flex flex-wrap justify-center space-x-6 py-4 lg:hidden">
-        <a href="#" class="text-base font-medium text-pluvo_green hover:text-pluvo_highlight_green font-sans font-bold">Dashboard</a>
-      </div>
+        <a href="{% url 'main:dashboard' %}" class="text-base font-medium text-pluvo_green hover:text-pluvo_highlight_green font-sans font-bold">Dashboard</a>
+        {% if user.is_superuser %}
+            <a href="{% url 'main:teacher' %}" class="text-base font-medium text-pluvo_green hover:text-pluvo_highlight_green font-sans font-bold">Teacher</a>
+        {% endif %}
+    </div>
     </nav>
 </header>
 {% endblock header %}
-
-{% block body %}
-<form action="{% url 'main:dashboard' %}" class="form m-5" method="post">
-    <br>
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" name="submit" class="btn btn-md color-1">
-</form>
-
-{% if scores|length > 0 %}
-    <div class="m-5">
-        <h3 class="text-center text-black">
-            User Scores:
-        </h3>
-        <table class="table table-striped">
-            <thead class="table-color-primary">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for score in scores %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ score.user.username }}</td>
-                    <td>{{ score.date }}</td>
-                    <td>{{ score.score }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>  
-{% else %}
-    <h3 class="text-center text-black">
-        Geen scores gevonden!
-    </h3>
-{% endif %}
-
-{% endblock body %}

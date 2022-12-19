@@ -1,0 +1,66 @@
+{% extends "main/dashboard.html" %}
+{% load static %}
+
+{% block body %}
+<main class="w-full mx-auto max-w-7xl">    
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-xl font-semibold text-gray-900">Scores</h1>
+                <p class="mt-2 text-sm text-gray-700">A list of user scores</p>
+            </div>
+        </div>
+        <form action="{% url 'main:dashboard' %}" class="form" method="post">
+            <br>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="flex justify-between">
+                <div class="flex">
+                    {{ form.user.errors }}
+                    <label for="password" class="sr-only">User</label>
+                    {{ form.user }}
+                </div>
+                <div class="block rounded-md shadow-sm bg-white py-1 px-2">
+                    {{ form.start.errors }}
+                    {{ form.end.errors }}
+                    {{ form.start }} - {{ form.end }}
+                </div>
+                <button type="submit" class="w-36 rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-white bg-pluvo_green hover:bg-pluvo_highlight_green focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Search
+                </button>
+            </div>
+        </form>
+        {% if scores|length > 0 %}
+            <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                    <tr>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">User</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Date</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Score</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                    {% for score in scores %}
+                    <tr>
+                        <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                            {{ score.user.username }}
+                            <dl class="font-normal lg:hidden">
+                                <dd class="mt-1 truncate text-gray-700">{{ score.date }}</dd>
+                            </dl>
+                        </td>
+                        <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ score.date }}</td>
+                        <td class="px-3 py-4 text-sm {% if score.score < 6 %} text-red-500 {% else %} text-gray-500 {% endif %}">{{ score.score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        {% else %}
+            <h3 class="text-center text-black">
+                Geen scores gevonden!
+            </h3>
+        {% endif %}
+    </div>
+</main>
+{% endblock body %}
