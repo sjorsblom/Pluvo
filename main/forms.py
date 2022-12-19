@@ -24,8 +24,7 @@ class ScoreSelectionForm(Form):
         }))
     user = ChoiceField(label="User:", choices=[], required=True, widget=Select(
         attrs={
-            'class': 'w-36 rounded-md border-gray-300 shadow-sm focus:border-pluvo_green focus:ring-pluvo_green sm:text-sm',
-            'type': 'date'
+            'class': 'w-36 rounded-md border-gray-300 shadow-sm focus:border-pluvo_green focus:ring-pluvo_green sm:text-sm'
         }
     ))
 
@@ -51,8 +50,7 @@ class UserLoginForm(AuthenticationForm):
         attrs={
             'class': 'relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-pluvo_green focus:outline-none focus:ring-pluvo_green sm:text-sm',
             'placeholder': 'Password'
-        }
-))
+        }))
 
 
 class GradeForm(Form):    
@@ -62,8 +60,7 @@ class GradeForm(Form):
 
     user = ChoiceField(label="User:", choices=[], required=True, widget=Select(
         attrs={
-            'class': 'block w-full rounded-md border-gray-300 shadow-sm focus:border-pluvo_green focus:ring-pluvo_green sm:text-sm',
-            'type': 'date'
+            'class': 'block w-full rounded-md border-gray-300 shadow-sm focus:border-pluvo_green focus:ring-pluvo_green sm:text-sm'
         }
     ))
 
